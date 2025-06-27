@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".ProductDetailActivity">
+
+    <!-- Cuộn phần nội dung chi tiết -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/donut1" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123.000đ"
+                android:textColor="#E91E63"
+                android:textSize="18sp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginTop="8dp"
+                android:text="Loại: Bánh ngọt"
+                android:textColor="#666" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả sản phẩm"
+                android:textSize="16sp"
+                android:textColor="#555"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Thanh bên dưới cố định -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:padding="8dp"
+        android:background="#FFF"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Thêm vào giỏ"
+            android:backgroundTint="#FFC107"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/btnBuyNow"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Mua ngay"
+            android:backgroundTint="#E91E63"
+            android:textColor="#FFF" />
+    </LinearLayout>
+
+</RelativeLayout>

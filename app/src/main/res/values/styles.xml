@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Style mặc định (nền tím pastel) -->
+    <style name="MenuItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">#D8B4F8</item> <!-- 💜 tím pastel -->
+    </style>
+
+    <!-- Style khi được chọn (nền đen, chữ trắng) -->
+    <style name="MenuItemStyle.Active" parent="MenuItemStyle">
+        <item name="android:background">#000000</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>

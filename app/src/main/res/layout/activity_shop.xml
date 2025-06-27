@@ -1,0 +1,62 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+        <TextView
+            android:text="Shop"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <include
+            layout="@layout/menu_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+        <!-- Danh sách bánh -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:listitem="@layout/item_category"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <!-- 🔶 Popular Items -->
+        <TextView
+            android:text="Product"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/item_cake" />
+        <include
+            layout="@layout/footer"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

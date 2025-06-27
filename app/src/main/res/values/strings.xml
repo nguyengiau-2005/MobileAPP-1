@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NGUYENTHINGOCGIAU_2123110205</string>
+    <string name="htn_username">User Name</string>
+    <string name="htn_pass">Pass word</string>
+    <string name="htn_login">Login</string>
+    <string name="register">Register</string>
+    <string name="back1">back1</string>
+    <string name="logo">Logo</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+</resources>

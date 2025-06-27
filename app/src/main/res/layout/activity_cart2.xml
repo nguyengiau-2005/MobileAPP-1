@@ -1,0 +1,33 @@
+<!-- res/layout/activity_cart.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:padding="16dp"
+    android:background="#FFF">
+
+    <TextView
+        android:id="@+id/txtCartTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🛒 Giỏ hàng của bạn"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thanh toán"
+        android:backgroundTint="#E91E63"
+        android:textColor="#FFF"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giỏ hàng"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+
+    <!-- Danh sách sản phẩm trong giỏ -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+
+    <!-- Thanh dưới cùng -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/checkboxSelectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tất cả" />
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tổng cộng: ₫0"
+            android:textColor="#000"
+            android:gravity="end"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnCheckout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mua hàng (0)"
+            android:backgroundTint="#FF5722"
+            android:textColor="#FFF" />
+    </LinearLayout>
+</LinearLayout>

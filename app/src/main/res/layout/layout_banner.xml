@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp">
+
+    <!-- Ảnh banner -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/donut1"
+        android:scaleType="centerCrop"
+        android:contentDescription="Banner" />
+
+    <!-- Chữ đè lên ảnh -->
+    <TextView
+        android:id="@+id/txtBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🎉 Special Offer! Buy 1 Get 1 Free 🎂 | Free Shipping Today Only 🚚 | Limited Time Offer! 🕒"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:background="@drawable/bg_cute_text"
+
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollHorizontally="true" />
+</FrameLayout>

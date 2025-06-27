@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="56dp"
+    android:layout_marginTop="12dp"
+    android:background="@drawable/bg_search"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
+
+    <!-- 🔍 Icon tìm kiếm -->
+    <ImageView
+        android:src="@android:drawable/ic_menu_search"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+
+    <!-- 🔠 Ô nhập -->
+    <EditText
+        android:id="@+id/edtSearch"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:hint="Search here..."
+        android:background="@android:color/transparent"
+        android:paddingStart="8dp"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:textColorHint="#888888" />
+
+    <!-- 🛒 Giỏ hàng -->
+    <ImageView
+        android:id="@+id/btnCart"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_cart"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Giỏ hàng"
+        android:scaleType="centerInside"
+        android:padding="8dp" />
+</LinearLayout>

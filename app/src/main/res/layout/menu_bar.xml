@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#F68929">
+
+    <!-- Menu Item -->
+    <TextView
+        android:id="@+id/btnHome"
+        style="@style/MenuItemStyle"
+        android:text="Home" />
+
+    <TextView
+        android:id="@+id/btnAbout"
+        style="@style/MenuItemStyle"
+        android:text="About" />
+
+    <TextView
+        android:id="@+id/btnShop"
+        style="@style/MenuItemStyle.Active"
+        android:text="Shop" />
+
+    <TextView
+        android:id="@+id/btnPages"
+        style="@style/MenuItemStyle"
+        android:text="Pages" />
+
+    <TextView
+        android:id="@+id/btnBlog"
+        style="@style/MenuItemStyle"
+        android:text="Blog" />
+
+    <TextView
+        android:id="@+id/btnContact"
+        style="@style/MenuItemStyle"
+        android:text="Contact" />
+</LinearLayout>
