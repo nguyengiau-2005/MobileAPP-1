@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp"
     android:orientation="vertical"
-    android:background="@drawable/footer_background"
+    android:background="#D8B"
     android:padding="16dp">
 
     <!-- Nội dung chính -->

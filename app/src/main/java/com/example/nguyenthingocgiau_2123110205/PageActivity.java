@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class AboutActivity extends AppCompatActivity {
+public class PageActivity extends AppCompatActivity {
     // Các nút menu
     TextView btnHome, btnAbout, btnShop, btnPages, btnBlog, btnContact;
     TextView[] menuButtons;
@@ -24,11 +24,12 @@ public class AboutActivity extends AppCompatActivity {
         }
         selectedBtn.setTextAppearance(R.style.MenuItemStyle_Active); // style khi được chọn
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,7 +38,7 @@ public class AboutActivity extends AppCompatActivity {
         // Nút tài khoản/avatar
         ImageView btnMenu = findViewById(R.id.btnMenu);  // đúng id
         btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(AboutActivity.this, v);
+            PopupMenu popup = new PopupMenu(PageActivity.this, v);
             popup.getMenuInflater().inflate(R.menu.menu_drawer, popup.getMenu()); // đúng tên file
 
             popup.setOnMenuItemClickListener(item -> {

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/main"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="24dp"
+    android:background="#FFF4EF"
+    android:padding="16dp">
+
+    <!-- ⬅️ FORM -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:paddingEnd="8dp">
+
+        <!-- Tiêu đề lớn -->
+        <TextView
+            android:text="REGISTER CLASS"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Phụ đề -->
+        <TextView
+            android:text="Made from your own hands"
+            android:textStyle="italic"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Tên -->
+        <EditText
+            android:id="@+id/edtName"
+            android:hint="Your Name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="textPersonName" />
+
+        <!-- Số điện thoại -->
+        <EditText
+            android:id="@+id/edtPhone"
+            android:hint="Phone Number"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="phone" />
+
+        <!-- Chọn lớp -->
+        <Spinner
+            android:id="@+id/spinnerClass"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Bộ lọc lớp nâng cao -->
+        <Spinner
+            android:id="@+id/spinnerSort"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Ghi chú -->
+        <EditText
+            android:id="@+id/edtNote"
+            android:hint="Your Notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:minLines="3"
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <!-- Nút Đăng ký -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="REGISTER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="12dp"
+            android:background="#F68B1F" />
+    </LinearLayout>
+
+    <!-- ➡️ HÌNH -->
+    <ImageView
+        android:id="@+id/imgClass"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/donut3"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center" />
+</LinearLayout>

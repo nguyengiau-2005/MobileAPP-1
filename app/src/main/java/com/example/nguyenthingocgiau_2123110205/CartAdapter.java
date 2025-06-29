@@ -61,6 +61,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 updateTotal();
             }
         });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            cartItems.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cartItems.size());
+            updateTotal();
+        });
     }
 
     @Override
@@ -68,7 +75,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return cartItems.size();
     }
 
-    // ✅ Phương thức updateTotal
     public void updateTotal() {
         double total = 0;
         for (CartItem item : cartItems) {
@@ -81,7 +87,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgProduct, btnPlus, btnMinus;
+        ImageView imgProduct, btnPlus, btnMinus, btnDelete;
         TextView txtName, txtPrice, txtQuantity;
         CheckBox checkboxItem;
 
@@ -94,6 +100,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnPlus = itemView.findViewById(R.id.btnPlus);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             checkboxItem = itemView.findViewById(R.id.checkboxItem);
+            btnDelete = itemView.findViewById(R.id.btnDelete); // thêm dòng này
         }
     }
 }

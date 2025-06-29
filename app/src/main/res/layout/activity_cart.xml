@@ -43,6 +43,7 @@
         android:background="#F5F5F5"
         android:orientation="horizontal"
         android:padding="12dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
 
         <CheckBox
@@ -56,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tổng cộng: ₫0"
+            android:hint="Tổng cộng: ₫0"
             android:textColor="#000"
             android:gravity="end"
             android:textSize="16sp" />
@@ -65,8 +66,9 @@
             android:id="@+id/btnCheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mua hàng (0)"
+            android:hint="Mua hàng (0)"
             android:backgroundTint="#FF5722"
             android:textColor="#FFF" />
     </LinearLayout>
+
 </LinearLayout>

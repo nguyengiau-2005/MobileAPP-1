@@ -12,90 +12,60 @@
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <!-- 🔶 Search bar -->
-        <LinearLayout
-            android:layout_marginTop="12dp"
+        <include layout="@layout/search_bar"/>
+        <!--search-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/bg_search"
             android:orientation="horizontal"
+            android:background="@drawable/bg_search"
+            android:paddingHorizontal="12dp"
             android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
+            android:layout_margin="8dp"
+            android:elevation="2dp">
 
+            <!-- Icon search -->
             <ImageView
-                android:src="@android:drawable/ic_menu_search"
                 android:layout_width="24dp"
-                android:layout_height="24dp" />
+                android:layout_height="24dp"
+                android:src="@drawable/bg_search"
+                android:layout_marginEnd="8dp"
+                app:tint="#888888" />
 
+            <!-- EditText để nhập -->
             <EditText
+                android:id="@+id/edtSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Search here..."
+                android:hint="Tìm kiếm bánh..."
                 android:background="@android:color/transparent"
-                android:paddingStart="8dp"
-                android:textSize="14sp"
-                android:minHeight="48dp" />
-            <!-- Icon giỏ hàng -->
-            <ImageView
-                android:id="@+id/btnCart"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_cart"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Giỏ hàng"
-                android:scaleType="centerInside"
-                app:layout_constraintTop_toTopOf="@+id/edtSearch"
-                app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="16sp"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textColorHint="#888888"/>
         </LinearLayout>
-        <!-- 🔶 Header -->
-        <TextView
-            android:text="Menu"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <include
-            layout="@layout/menu_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+        <!-- 🔶 Header -->
         <!--banner  -->
         <include layout="@layout/layout_banner" />
-        <include layout="@layout/about_cake"/>
-        <!-- 🔶 Categories -->
         <TextView
-            android:text="Categories"
+            android:id="@+id/tvFlashSaleTitle"
+            android:text="Flash Sale end in:"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_category"
-            android:orientation="horizontal"
-            android:overScrollMode="never" />
-
-        <!-- 🔶 Promotions -->
-        <TextView
-            android:text="Promotions"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/tvFlashSaleTimer"
+            android:text="02:12:59"
+            android:textColor="#FF5722"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +109,33 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerInside" />
-        </LinearLayout>
+        </LinearLayout>        <!-- 🔶 Categories -->
+        <TextView
+            android:text="Categories"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:listitem="@layout/item_category"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+
+        <!-- 🔶 Promotions -->
+        <TextView
+            android:text="Promotions"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
         <!-- 🔶 Popular Items -->
         <TextView
@@ -157,96 +153,53 @@
             android:layout_marginTop="8dp"
             android:nestedScrollingEnabled="false"
             tools:listitem="@layout/item_cake" />
-        <!-- 🔶 Register for Cake Class -->
-        <LinearLayout
+        <TextView
+            android:text="Recent Orders"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp"
-            android:background="#FFF4EF"
-            android:padding="16dp"
-            android:layout_marginBottom="24dp">
+            tools:listitem="@layout/item_order"
+            android:layout_marginTop="8dp" />
 
-            <!-- ⬅️ FORM -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingEnd="8dp">
+        <!-- 🔶 Register for Cake Class -->
+        <include layout="@layout/layout_register_class"/>
+        <TextView
+            android:text="Your Feedback"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"/>
 
-                <TextView
-                    android:text="CLASS CAKES"
-                    android:textColor="#F68B1F"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edtFeedback"
+            android:hint="Let us know what you think..."
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="3"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:text="Made from your own hands"
-                    android:textStyle="italic"
-                    android:textSize="20sp"
-                    android:textColor="#000000"
-                    android:layout_marginBottom="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnSubmitFeedback"
+            android:text="Submit Feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#F68B1F"
+            android:textColor="#FFF" />
 
-                <EditText
-                    android:hint="Your Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:inputType="textPersonName" />
-
-                <EditText
-                    android:hint="Phone Number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:inputType="phone" />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="48dp"
-                    android:background="#FFFFFF" />
-
-                <EditText
-                    android:hint="Your Notes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:minLines="3"
-                    android:gravity="top"
-                    android:inputType="textMultiLine" />
-
-                <Button
-                    android:text="REGISTER"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
-                    android:background="#3F51B5" />
-            </LinearLayout>
-
-            <!-- ➡️ HÌNH -->
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/donut3"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center" />
-        </LinearLayout>
         <include
             layout="@layout/footer"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
     </LinearLayout>

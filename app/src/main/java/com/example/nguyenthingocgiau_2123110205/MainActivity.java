@@ -32,15 +32,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                String  txtUser = objUser.getText().toString();
-//                String txtPass = objPass.getText().toString();
-//
-//                if (txtUser.equals("nguyengiau") && txtPass.equals("1234")) {
+                String  txtUser = objUser.getText().toString();
+                String txtPass = objPass.getText().toString();
+                if (txtUser.isEmpty() || txtPass.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), " vui lòng nhap thong tin day du!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (txtUser.equals("nguyengiau") && txtPass.equals("1234")) {
                     Intent it = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(it);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Login Fail", Toast.LENGTH_LONG).show();
-//                }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Login Fail", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

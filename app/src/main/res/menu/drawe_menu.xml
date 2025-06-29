@@ -1,0 +1,7 @@
+<!-- res/menu/drawe_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_signin" android:title="Sign In" />
+    <item android:id="@+id/menu_signout" android:title="Sign Out" />
+    <item android:id="@+id/menu_register" android:title="Register" />
+    <item android:id="@+id/menu_settings" android:title="Settings" />
+</menu>
