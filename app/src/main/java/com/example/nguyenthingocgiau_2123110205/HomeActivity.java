@@ -3,6 +3,9 @@ package com.example.nguyenthingocgiau_2123110205;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
@@ -17,10 +20,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,15 +33,12 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<Cake> cakeList;
     CakeAdapter adapter;
 
-    // Menu điều hướng
     TextView btnHome, btnAbout, btnShop, btnPages, btnBlog, btnContact;
     TextView[] menuButtons;
 
-    // Flash Sale Timer
     TextView tvFlashSaleTimer;
     CountDownTimer countDownTimer;
 
-    // Hàm animation cho ProgressBar
     private void animateProgress(ProgressBar progressBar, TextView textView, int target) {
         new Thread(() -> {
             int progress = 0;
@@ -56,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         }).start();
     }
 
-    // Active menu đang chọn
     private void setActive(TextView selectedBtn) {
         for (TextView btn : menuButtons) {
             btn.setTextAppearance(R.style.MenuItemStyle);
@@ -76,31 +77,45 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Banner chạy chữ
-        TextView txtBanner = findViewById(R.id.txtBanner);
-        txtBanner.setSelected(true);
+        // === BANNER ===
+        ViewPager2 viewPager = findViewById(R.id.bannerSlider);
+        List<Banner> banners = new ArrayList<>();
+        banners.add(new Banner(R.drawable.banner1, "Big Sale 50% Off"));
+        banners.add(new Banner(R.drawable.banner2, "Buy 1 Get 1 Free"));
+        banners.add(new Banner(R.drawable.banner3, "Free Shipping Today"));
 
-        // Khởi tạo RecyclerView
+        viewPager.setAdapter(new BannerAdapter(banners));
+
+        // Auto-scroll
+        Handler bannerHandler = new Handler();
+        Runnable bannerRunnable = new Runnable() {
+            int currentPage = 0;
+
+            @Override
+            public void run() {
+                if (viewPager.getAdapter() != null) {
+                    int totalPages = viewPager.getAdapter().getItemCount();
+                    currentPage = (currentPage + 1) % totalPages;
+                    viewPager.setCurrentItem(currentPage, true);
+                }
+                bannerHandler.postDelayed(this, 3000);
+            }
+        };
+        bannerHandler.postDelayed(bannerRunnable, 3000);
+
+        // === DANH MỤC & SẢN PHẨM ===
         RecyclerView recyclerCategory = findViewById(R.id.recyclerCategory);
         recyclerCake = findViewById(R.id.recyclerCake);
 
-        // Danh mục
         List<Category> categories = new ArrayList<>();
-        categories.add(new Category("Donuts", R.drawable.cupcakes));
+        categories.add(new Category("Donuts", R.drawable.donut2));
         categories.add(new Category("Cakes", R.drawable.donut2));
-        categories.add(new Category("Cupcakes", R.drawable.donuts));
-        categories.add(new Category("Padding", R.drawable.donut2));
-        categories.add(new Category("Cakey", R.drawable.donut1));
 
         CategoryAdapter catAdapter = new CategoryAdapter(this, categories);
         recyclerCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerCategory.setAdapter(catAdapter);
 
-        // Danh sách bánh
         List<Cake> cakes = new ArrayList<>();
-        cakes.add(new Cake("Choco Donut", "Chocolate", 15.5, R.drawable.product1));
-        cakes.add(new Cake("Choco Cupcakes", "Donuts", 13.5, R.drawable.product2));
-        cakes.add(new Cake("Choco Donut", "Chocolate", 15.5, R.drawable.product3));
         cakes.add(new Cake("Choco Cupcakes", "Donuts", 13.5, R.drawable.donut3));
         cakes.add(new Cake("Choco Donut", "Chocolate", 15.5, R.drawable.donut2));
         cakes.add(new Cake("Choco Cupcakes", "Donuts", 13.5, R.drawable.donut3));
@@ -110,81 +125,46 @@ public class HomeActivity extends AppCompatActivity {
         recyclerCake.setNestedScrollingEnabled(false);
         recyclerCake.setAdapter(cakeAdapter);
 
-        // Nút giỏ hàng
+        // === GIỎ HÀNG ===
         ImageView btnCart = findViewById(R.id.btnCart);
         btnCart.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, CartActivity.class);
             startActivity(intent);
         });
 
-        // Nút tài khoản/avatar
-        ImageView btnAccount = findViewById(R.id.btnAccount);
-        btnAccount.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(HomeActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.drawe_menu, popup.getMenu());
-
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.menu_signin) {
-                    startActivity(new Intent(this, SinginActivity.class));
-                } else if (id == R.id.menu_signout) {
-                    Toast.makeText(this, "Sign Out clicked", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.menu_settings) {
-                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.menu_register) {
-                    startActivity(new Intent(this, RegisterActivity.class));
-                }
+        // === BOTTOM NAVIGATION ===
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+        bottomNav.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(this, HomeActivity.class));
                 return true;
-            });
-
-            popup.show();
-        });
-        // Nút tài khoản/avatar
-        ImageView btnMenu = findViewById(R.id.btnMenu);  // đúng id
-        btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(HomeActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.menu_drawer, popup.getMenu()); // đúng tên file
-
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.menu_home) {
-                    startActivity(new Intent(this, HomeActivity.class));
-                } else if (id == R.id.menu_shop) {
-                    startActivity(new Intent(this, ShopActivity.class));
-                } else if (id == R.id.menu_about) {
-                    startActivity(new Intent(this, AboutActivity.class));
-                } else if (id == R.id.menu_contact) {
-                    startActivity(new Intent(this, ContactActivity.class));
-                }else if (id == R.id.menu_pages) {
-                    startActivity(new Intent(this, PageActivity.class));
-                }
+            } else if (id == R.id.nav_shop) {
+                startActivity(new Intent(this, ShopActivity.class));
                 return true;
-            });
+            } else if (id == R.id.nav_account) {
+                PopupMenu popupMenu = new PopupMenu(this, bottomNav);
 
-            popup.show();  // QUAN TRỌNG
+                popupMenu.getMenu().add(Menu.NONE, 1, 0, "Đăng nhập");
+                popupMenu.getMenu().add(Menu.NONE, 2, 1, "Đăng ký");
+                popupMenu.getMenu().add(Menu.NONE, 3, 2, "Đăng xuất");
+
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    int itemId = menuItem.getItemId();
+                    if (itemId == 1) {
+                        startActivity(new Intent(HomeActivity.this, SiginActivity.class));
+                    } else if (itemId == 2) {
+                        startActivity(new Intent(HomeActivity.this, RegisterActivity.class));
+                    } else if (itemId == 3) {
+                        Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                });
+
+                popupMenu.show();
+                return true;
+            }
+            return false;
         });
-
-        // Flash Sale Countdown
-        tvFlashSaleTimer = findViewById(R.id.tvFlashSaleTimer);
-        long duration = 5 * 60 * 1000; // 5 phút
-
-        countDownTimer = new CountDownTimer(duration, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                int hours = (int) (millisUntilFinished / (1000 * 60 * 60));
-                int minutes = (int) ((millisUntilFinished / (1000 * 60)) % 60);
-                int seconds = (int) ((millisUntilFinished / 1000) % 60);
-
-                String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
-                tvFlashSaleTimer.setText(timeFormatted);
-            }
-
-            @Override
-            public void onFinish() {
-                tvFlashSaleTimer.setText("00:00:00");
-            }
-        };
-
-        countDownTimer.start();
     }
 }

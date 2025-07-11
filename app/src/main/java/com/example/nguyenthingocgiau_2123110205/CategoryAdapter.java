@@ -10,30 +10,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nguyenthingocgiau_2123110205.Category;
+import com.example.nguyenthingocgiau_2123110205.R;
+
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    Context context;
-    List<Category> categoryList;
+    private Context context;
+    private List<Category> categoryList;
 
-    public CategoryAdapter(Context context, List<Category> list) {
+    public CategoryAdapter(Context context, List<Category> categoryList) {
         this.context = context;
-        this.categoryList = list;
+        this.categoryList = categoryList;
     }
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
-        return new CategoryViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        Category cat = categoryList.get(position);
-        holder.txtCategory.setText(cat.getName());
-        holder.imgCategory.setImageResource(cat.getImageResId());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Category category = categoryList.get(position);
+        holder.title.setText(category.getTitle());
+        holder.tvCategoryName.setText(category.getTitle());
+        holder.icon.setImageResource(category.getIcon()); // hoặc dùng Glide nếu cần
     }
 
     @Override
@@ -41,14 +45,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryList.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgCategory;
-        TextView txtCategory;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView icon;
+        TextView title;
+        TextView tvCategoryName;
 
-        public CategoryViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgCategory = itemView.findViewById(R.id.imgCategory);
-            txtCategory = itemView.findViewById(R.id.txtCategory);
+            icon = itemView.findViewById(R.id.imgCategory);
+            title = itemView.findViewById(R.id.tvCategoryName); // ✅ Đúng ID trong XML
+            tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
     }
 }

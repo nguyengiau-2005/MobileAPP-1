@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:padding="16dp">
             <!--search-->
-            <include layout="@layout/search_bar"/>
+            <include layout="@layout/menu_bar"/>
 
 
             <ImageView

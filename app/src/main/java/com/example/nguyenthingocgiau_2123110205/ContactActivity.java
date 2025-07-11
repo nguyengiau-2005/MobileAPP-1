@@ -39,6 +39,8 @@ public class ContactActivity extends AppCompatActivity {
                     startActivity(new Intent(this, AboutActivity.class));
                 } else if (id == R.id.menu_contact) {
                     startActivity(new Intent(this, ContactActivity.class));
+                } else if (id == R.id.menu_pages) {
+                    startActivity(new Intent(this, PageActivity.class));
                 }
                 return true;
             });

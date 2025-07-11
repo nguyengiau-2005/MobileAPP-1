@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff">
+    android:background="@drawable/bg_spinner">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <!-- Nội dung chính scroll được -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!--search-->
-        <include layout="@layout/search_bar"/>
-        <!-- 🔶 Header -->
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 🔍 Search bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_spinner">
+
+                <ImageView
+                    android:src="@drawable/ic_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:hint="Search.."
+                    android:background="@null"
+                    android:paddingStart="8dp" />
+
+                <ImageView
+                    android:src="@drawable/ic_filter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+            <!-- 🔶 Header -->
         <TextView
             android:text="Class"
             android:textSize="24sp"
@@ -24,11 +57,116 @@
             android:layout_height="wrap_content" />
 
 
-        <include
-            layout="@layout/layout_register_class"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#FFF4EF"
+            android:padding="16dp">
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            <!-- ⬅️ FORM -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="8dp">
+
+                <!-- Tiêu đề lớn -->
+                <TextView
+                    android:text="REGISTER CLASS"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Phụ đề -->
+                <TextView
+                    android:text="Made from your own hands"
+                    android:textStyle="italic"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Tên -->
+                <EditText
+                    android:id="@+id/edtName"
+                    android:hint="Your Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:inputType="textPersonName" />
+
+                <!-- Số điện thoại -->
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:hint="Phone Number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:inputType="phone" />
+
+                <!-- Chọn lớp -->
+                <Spinner
+                    android:id="@+id/spinnerClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Bộ lọc lớp nâng cao -->
+                <Spinner
+                    android:id="@+id/spinnerSort"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Ghi chú -->
+                <EditText
+                    android:id="@+id/edtNote"
+                    android:hint="Your Notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+
+                <!-- Nút Đăng ký -->
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:text="REGISTER"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:padding="12dp"
+                    android:background="#F68B1F" />
+            </LinearLayout>
+
+            <!-- ➡️ HÌNH -->
+            <ImageView
+                android:id="@+id/imgClass"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/donut3"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center" />
+        </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- 🔽 Bottom Menu -->
+    <include
+        layout="@layout/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp" />
+</LinearLayout>

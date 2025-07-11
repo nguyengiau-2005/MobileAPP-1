@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_spinner">
 
-    <!-- Tiêu đề -->
+    <!-- Nội dung chính scroll được -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 🔍 Search bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_spinner">
+
+                <ImageView
+                    android:src="@drawable/ic_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:hint="Search.."
+                    android:background="@null"
+                    android:paddingStart="8dp" />
+
+                <ImageView
+                    android:src="@drawable/ic_filter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+
+            <!-- Tiêu đề -->
     <TextView
         android:id="@+id/tvContactTitle"
         android:layout_width="wrap_content"
@@ -131,3 +173,12 @@
         android:textColor="#FFFFFF"
         android:padding="12dp"/>
 </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- 🔽 Bottom Menu -->
+    <include
+        layout="@layout/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp" />
+</LinearLayout>
+

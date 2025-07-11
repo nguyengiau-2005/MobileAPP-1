@@ -1,71 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#FFF4EF">
+    android:background="@drawable/back1">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
         android:gravity="center_horizontal">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/cat"
+            android:layout_marginTop="30dp" />
+
         <TextView
-            android:text="REGISTER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#F68B1F"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="24dp"/>
+            android:textColor="#FF4081"
+            android:layout_marginTop="20dp" />
 
+        <!-- Username -->
         <EditText
-            android:id="@+id/edtUsername"
+            android:id="@+id/txtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:hint="Username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="#FFFFFF"
-            android:padding="12dp"/>
+            android:drawableStart="@drawable/ic_user"
+            android:background="@drawable/edittext_background"
+            android:paddingStart="12dp"
+            android:layout_marginTop="20dp" />
 
+        <!-- Email -->
         <EditText
-            android:id="@+id/edtEmail"
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:hint="Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="#FFFFFF"
-            android:padding="12dp"
-            android:inputType="textEmailAddress"/>
+            android:drawableStart="@drawable/ic_email"
+            android:background="@drawable/edittext_background"
+            android:paddingStart="12dp"
+            android:layout_marginTop="12dp" />
 
+        <!-- Password -->
         <EditText
-            android:id="@+id/edtPassword"
+            android:id="@+id/txtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:hint="Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="#FFFFFF"
-            android:padding="12dp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/ic_lock"
+            android:background="@drawable/edittext_background"
+            android:paddingStart="12dp"
+            android:layout_marginTop="12dp" />
 
+        <!-- Confirm Password -->
         <EditText
-            android:id="@+id/edtConfirm"
-            android:hint="Confirm Password"
+            android:id="@+id/txtConfirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="#FFFFFF"
-            android:padding="12dp"
-            android:inputType="textPassword"/>
+            android:layout_height="50dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/ic_lock"
+            android:background="@drawable/edittext_background"
+            android:paddingStart="12dp"
+            android:layout_marginTop="12dp" />
+
 
         <Button
             android:id="@+id/btnRegister"
-            android:text="REGISTER"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#3F51B5"
-            android:textColor="#FFFFFF"/>
+            android:layout_height="50dp"
+            android:text="Register"
+            android:textStyle="bold"
+            android:backgroundTint="#FF4081"
+            android:textColor="#FFF"
+            android:layout_marginTop="20dp" />
 
+        <TextView
+            android:id="@+id/txtBackToLogin"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Sign In"
+            android:textColor="#444"
+            android:layout_marginTop="30dp" />
     </LinearLayout>
 </ScrollView>

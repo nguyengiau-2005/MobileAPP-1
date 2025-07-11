@@ -21,11 +21,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
+//implements OnMapReadyCallback goi map
 public class ShopActivity extends AppCompatActivity {
 
     RecyclerView recyclerCake;
@@ -38,6 +45,8 @@ public class ShopActivity extends AppCompatActivity {
 
     int currentPage = 1;
     int itemsPerPage = 9;
+    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +59,20 @@ public class ShopActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Áp dụng hệ thống inset
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+//        // Gọi Google Map fragment
+//        SupportMapFragment mapFragment = (SupportMapFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.mapFragment);
+//        if (mapFragment != null) {
+//            mapFragment.getMapAsync(this);
+//        }
+
         ImageView btnProfile = findViewById(R.id.btnAccount);
         btnProfile.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(ShopActivity.this, v);  // ⬅ Đây là khai báo popup đúng chỗ
@@ -151,7 +174,7 @@ public class ShopActivity extends AppCompatActivity {
             popup.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
                 if (id == R.id.menu_signin) {
-                    Intent intent = new Intent(ShopActivity.this, MainActivity.class);
+                    Intent intent = new Intent(ShopActivity.this, SiginActivity.class);
                     startActivity(intent);
                 } else if (id == R.id.menu_signout) {
                     Toast.makeText(this, "Sign Out clicked", Toast.LENGTH_SHORT).show();
@@ -189,6 +212,17 @@ public class ShopActivity extends AppCompatActivity {
             popup.show();  // QUAN TRỌNG
         });
     }
+    // Google Map hiển thị khi đã sẵn sàng
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//
+//        LatLng shopLocation = new LatLng(10.7769, 106.7009);
+//        mMap.addMarker(new MarkerOptions()
+//                .position(shopLocation)
+//                .title("Shop ABC - 123 Đường X, Quận 1"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(shopLocation, 16));
+//    }
 
     private void setupSpinners() {
         String[] categories = {"All", "Cake", "Donut", "Ice Cream", "Drink"};

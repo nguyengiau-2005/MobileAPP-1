@@ -2,6 +2,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:id="@+id/main"
     android:background="#f0f0f0"
     android:gravity="center_vertical"
     android:paddingHorizontal="12dp"
@@ -13,7 +14,7 @@
         android:id="@+id/btnMenu"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_menu"
+        android:src="@drawable/ic_home"
         android:layout_weight="1"
         android:layout_gravity="center_vertical" />
 
@@ -39,10 +40,10 @@
 
         <ImageView
             android:id="@+id/btnCart"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_cart"
-            android:layout_marginHorizontal="8dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/ic_cart" />
 
         <ImageView
             android:id="@+id/btnNotification"

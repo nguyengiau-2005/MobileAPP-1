@@ -1,206 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
-    android:background="#ffff">
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".HomeActivity">
 
+    <!-- 🧭 Top Bar -->
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/search_bar"/>
-        <!--search-->
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_search"
-            android:paddingHorizontal="12dp"
-            android:gravity="center_vertical"
-            android:layout_margin="8dp"
-            android:elevation="2dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="#8B4C11">
 
-            <!-- Icon search -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/bg_search"
-                android:layout_marginEnd="8dp"
-                app:tint="#888888" />
+        <ImageView
+            android:src="@drawable/ic_location"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
 
-            <!-- EditText để nhập -->
-            <EditText
-                android:id="@+id/edtSearch"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Tìm kiếm bánh..."
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:inputType="text"
-                android:textColor="#000000"
-                android:textColorHint="#888888"/>
-        </LinearLayout>
-
-        <!-- 🔶 Header -->
-        <!--banner  -->
-        <include layout="@layout/layout_banner" />
         <TextView
-            android:id="@+id/tvFlashSaleTitle"
-            android:text="Flash Sale end in:"
+            android:layout_marginStart="8dp"
+            android:text="New York, USA"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tvFlashSaleTimer"
-            android:text="02:12:59"
-            android:textColor="#FF5722"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_promotion"
-            android:padding="16dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/btnCart"
+            android:src="@drawable/ic_cart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp" />
 
-            <LinearLayout
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_belll"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+    </LinearLayout>
 
-                <TextView
-                    android:text="Today's Offer"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#444444"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+    <!-- 🧭 Search bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_spinner"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Taro Donuts"
-                    android:textColor="#9C27B0"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:text="on all orders $10"
-                    android:textColor="#666666"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <ImageView
-                android:src="@drawable/donut3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="centerInside" />
-        </LinearLayout>        <!-- 🔶 Categories -->
-        <TextView
-            android:text="Categories"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_category"
-            android:orientation="horizontal"
-            android:overScrollMode="never" />
-
-        <!-- 🔶 Promotions -->
-        <TextView
-            android:text="Promotions"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <!-- 🔶 Popular Items -->
-        <TextView
-            android:text="Product"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCake"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/item_cake" />
-        <TextView
-            android:text="Recent Orders"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerOrders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_order"
-            android:layout_marginTop="8dp" />
-
-        <!-- 🔶 Register for Cake Class -->
-        <include layout="@layout/layout_register_class"/>
-        <TextView
-            android:text="Your Feedback"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"/>
+        <ImageView
+            android:src="@drawable/ic_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/edtFeedback"
-            android:hint="Let us know what you think..."
-            android:background="#FFFFFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minLines="3"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="8dp" />
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="Search"
+            android:paddingStart="8dp"
+            android:background="@null"
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnSubmitFeedback"
-            android:text="Submit Feedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="#F68B1F"
-            android:textColor="#FFF" />
-
-        <include
-            layout="@layout/footer"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+        <ImageView
+            android:src="@drawable/ic_filter"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+    <!-- Nội dung chính -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <!-- 🎉 Banner -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/bannerSlider"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- 🧁 Categories -->
+            <TextView
+                android:text="Categories"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_category" />
+
+            <!-- 🍩 Featured Products -->
+            <TextView
+                android:text="Featured Products"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_cake" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ⚓ Bottom Menu -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector" />
+</LinearLayout>

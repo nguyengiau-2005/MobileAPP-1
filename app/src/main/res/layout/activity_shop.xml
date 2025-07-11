@@ -1,63 +1,116 @@
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff">
+    android:background="@drawable/bg_spinner">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <!-- Nội dung chính scroll được -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
 
-        <include
-            layout="@layout/search_bar"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 🔍 Search bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_spinner">
+
+                <ImageView
+                    android:src="@drawable/ic_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:hint="Search.."
+                    android:background="@null"
+                    android:paddingStart="8dp" />
+
+                <ImageView
+                    android:src="@drawable/ic_filter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
-<!--        <TextView-->
-<!--            android:text="Shop"-->
-<!--            android:textSize="24sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="#000000"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content" />-->
-        <!--search-->
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:orientation="horizontal"
-            android:background="@drawable/bg_search"
-            android:paddingHorizontal="12dp"
             android:gravity="center_vertical"
-            android:layout_margin="8dp"
-            android:elevation="2dp">
+            android:layout_marginTop="8dp"
+            android:weightSum="2">
 
-            <!-- Icon search -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/bg_search"
-                android:layout_marginEnd="8dp"
-                app:tint="#888888" />
-
-            <!-- EditText để nhập -->
-            <EditText
-                android:id="@+id/edtSearch"
+            <!-- Category -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Tìm kiếm bánh..."
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:inputType="text"
-                android:textColor="#000000"
-                android:textColorHint="#888888"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
 
-        <include layout="@layout/sortting_categories"/>
+                <TextView
+                    android:text="Category"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="4dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:spinnerMode="dropdown"
+                    android:dropDownVerticalOffset="10dp" />
+            </LinearLayout>
+
+            <!-- Sort -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="Sort"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="4dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerSort"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:spinnerMode="dropdown"
+                    android:dropDownVerticalOffset="10dp" />
+            </LinearLayout>
+        </LinearLayout>
         <!-- Danh sách bánh -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCategory"
@@ -121,5 +174,12 @@
             layout="@layout/footer"
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- 🔽 Bottom Menu -->
+    <include
+        layout="@layout/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp" />
 </LinearLayout>
-</androidx.core.widget.NestedScrollView>

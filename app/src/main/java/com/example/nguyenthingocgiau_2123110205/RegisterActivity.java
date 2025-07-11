@@ -8,35 +8,40 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edtUsername, edtEmail, edtPassword, edtConfirm;
-    Button btnRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(
+                    insets.getInsets(WindowInsetsCompat.Type.systemBars()).left,
+                    insets.getInsets(WindowInsetsCompat.Type.systemBars()).top,
+                    insets.getInsets(WindowInsetsCompat.Type.systemBars()).right,
+                    insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom
+            );
             return insets;
         });
-        edtUsername = findViewById(R.id.edtUsername);
-        edtEmail = findViewById(R.id.edtEmail);
-        edtPassword = findViewById(R.id.edtPassword);
-        edtConfirm = findViewById(R.id.edtConfirm);
-        btnRegister = findViewById(R.id.btnRegister);
 
+        // Ánh xạ các thành phần giao diện
+        EditText txtUsername = findViewById(R.id.txtUsername);
+        EditText txtEmail = findViewById(R.id.txtEmail);
+        EditText txtPassword = findViewById(R.id.txtPassword);
+        EditText txtConfirm = findViewById(R.id.txtConfirm);
+        Button btnRegister = findViewById(R.id.btnRegister);
+
+        // Xử lý sự kiện khi nhấn nút Đăng ký
         btnRegister.setOnClickListener(v -> {
-            String username = edtUsername.getText().toString().trim();
-            String email = edtEmail.getText().toString().trim();
-            String password = edtPassword.getText().toString();
-            String confirm = edtConfirm.getText().toString();
+            String username = txtUsername.getText().toString().trim();
+            String email = txtEmail.getText().toString().trim();
+            String password = txtPassword.getText().toString();
+            String confirm = txtConfirm.getText().toString(); // dùng đúng biến đã ánh xạ
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
@@ -48,11 +53,9 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            // Ở đây bạn có thể lưu vào SharedPreferences hoặc Database
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-
-            // Quay về SignInActivity
-            Intent intent = new Intent(this, SinginActivity.class);
+            // Chuyển về màn hình đăng nhập
+            Intent intent = new Intent(this, SiginActivity.class); // đảm bảo tên class đúng
             startActivity(intent);
             finish();
         });
