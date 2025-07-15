@@ -1,4 +1,4 @@
-package com.example.nguyenthingocgiau_2123110205;
+package com.example.nguyenthingocgiau_2123110205.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nguyenthingocgiau_2123110205.Category;
+import com.example.nguyenthingocgiau_2123110205.model.Category;
 import com.example.nguyenthingocgiau_2123110205.R;
 
 import java.util.List;

@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.example.nguyenthingocgiau_2123110205.model.Cake; // ✅ Thêm dòng này
+
 public class CakeSortHelper {
 
     // Sắp xếp A-Z theo tên

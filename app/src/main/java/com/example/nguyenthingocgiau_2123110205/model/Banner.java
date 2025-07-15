@@ -1,4 +1,4 @@
-package com.example.nguyenthingocgiau_2123110205;
+package com.example.nguyenthingocgiau_2123110205.model;
 
 public class Banner {
     private int imageResId;

@@ -1,106 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
-    tools:context=".ProductDetailActivity">
+    android:background="#FFF4F8">
 
-    <!-- Cuộn phần nội dung chi tiết -->
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="0dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_alignParentTop="true" />
+
+    <!-- Nội dung cuộn -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar">
-
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/bottomNavigation"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
-            <!--search-->
-            <include layout="@layout/menu_bar"/>
+            android:padding="16dp"
+            android:gravity="center">
 
-
-            <ImageView
-                android:id="@+id/imgProduct"
+            <!-- Hình ảnh Cupcake -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/donut1"
-                android:padding="16dp"
-                />
+                android:layout_height="200dp"
+                android:background="#FFEB88"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/detailImage"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cupcakes" />
+            </LinearLayout>
+
+            <!-- Thông tin sản phẩm -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên sản phẩm"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="12dp" />
+                android:background="@drawable/bg_round_white"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/txtPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="123.000đ"
-                android:textColor="#E91E63"
-                android:textSize="18sp"
-                android:layout_marginTop="4dp" />
+                <TextView
+                    android:id="@+id/detailName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ginger Cupcake"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000" />
 
-            <TextView
-                android:id="@+id/txtCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:layout_marginTop="8dp"
-                android:text="Loại: Bánh ngọt"
-                android:textColor="#666" />
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cream cheese"
+                    android:textColor="#777"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp" />
 
-            <TextView
-                android:id="@+id/txtDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mô tả sản phẩm"
-                android:textSize="16sp"
-                android:textColor="#555"
-                android:layout_marginBottom="16dp" />
+                <!-- Tags -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Figs"
+                        android:background="#E5FAF2"
+                        android:textColor="#000"
+                        android:padding="6dp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ginger"
+                        android:background="#FFF4C2"
+                        android:textColor="#000"
+                        android:padding="6dp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lactose"
+                        android:background="#FDECEC"
+                        android:textColor="#000"
+                        android:padding="6dp" />
+                </LinearLayout>
+
+                <!-- Giá -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/detailPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="29.000đ"
+                        android:textColor="#E91E63"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/detailOriginalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="39.000đ"
+                        android:textColor="#888"
+                        android:textSize="14sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Mô tả -->
+                <TextView
+                    android:id="@+id/txtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cupcake chocolate bar gummi bears lemon drops. Wafer bonbon chocolate bar chocolate. Cheesecake chocolate toffee brownie gingerbread croissant cupcake."
+                    android:textColor="#555"
+                    android:textSize="13sp"
+                    android:layout_marginTop="12dp" />
+
+                <!-- Nút -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <ImageButton
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/add_heart"
+                        android:contentDescription="Favorite" />
+
+                    <Button
+                        android:id="@+id/btnBuyNow"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="Buy now"
+                        android:backgroundTint="#F4A2B8"
+                        android:textColor="#FFF"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnAddToCart"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="Add Cart"
+                        android:backgroundTint="#F4A2B8"
+                        android:textColor="#FFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Related -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Related Products"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="#000" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerCake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:layout_marginBottom="16dp" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Thanh bên dưới cố định -->
-    <LinearLayout
-        android:id="@+id/bottomBar"
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:padding="8dp"
-        android:background="#FFF"
-        android:elevation="4dp">
-
-        <Button
-            android:id="@+id/btnAddToCart"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Thêm vào giỏ"
-            android:backgroundTint="#FFC107"
-            android:textColor="#000" />
-
-        <Button
-            android:id="@+id/btnBuyNow"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mua ngay"
-            android:backgroundTint="#E91E63"
-            android:textColor="#FFF" />
-    </LinearLayout>
+        android:background="#FFFFFF"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector" />
 
 </RelativeLayout>

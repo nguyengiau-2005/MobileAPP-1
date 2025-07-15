@@ -109,7 +109,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_whatsapp"
+                android:src="@drawable/ic_instagram"
                 android:layout_marginEnd="12dp" />
 
             <ImageView
@@ -129,8 +129,8 @@
             android:id="@+id/txtRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Register"
-            android:textColor="#444"
+            android:text="Don't have an Register account?"
+            android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginTop="30dp" />
     </LinearLayout>

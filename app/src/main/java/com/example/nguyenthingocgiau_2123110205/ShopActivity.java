@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,32 +20,30 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.example.nguyenthingocgiau_2123110205.adapter.CakeAdapter;
+import com.example.nguyenthingocgiau_2123110205.adapter.CategoryAdapter;
+import com.example.nguyenthingocgiau_2123110205.model.Cake;
+import com.example.nguyenthingocgiau_2123110205.model.Category;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-//implements OnMapReadyCallback goi map
+
 public class ShopActivity extends AppCompatActivity {
 
     RecyclerView recyclerCake;
     List<Cake> allCakes = new ArrayList<>();
+    List<Cake> filteredCakes = new ArrayList<>();
     List<Cake> currentCakes = new ArrayList<>();
     CakeAdapter adapter;
 
     Spinner spinnerCategory, spinnerSort;
-    TextView[] menuButtons;
 
     int currentPage = 1;
-    int itemsPerPage = 9;
-    private GoogleMap mMap;
+    int itemsPerPage = 6;
 
+    String selectedCategory = "All";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,72 +56,16 @@ public class ShopActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Áp dụng hệ thống inset
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-//        // Gọi Google Map fragment
-//        SupportMapFragment mapFragment = (SupportMapFragment)
-//                getSupportFragmentManager().findFragmentById(R.id.mapFragment);
-//        if (mapFragment != null) {
-//            mapFragment.getMapAsync(this);
-//        }
-
-        ImageView btnProfile = findViewById(R.id.btnAccount);
-        btnProfile.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(ShopActivity.this, v);  // ⬅ Đây là khai báo popup đúng chỗ
-            popup.getMenuInflater().inflate(R.menu.drawe_menu, popup.getMenu());
-
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-
-                SharedPreferences prefs = getSharedPreferences("USER", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-
-                if (id == R.id.menu_signin) {
-                    startActivity(new Intent(this, MainActivity.class));
-                } else if (id == R.id.menu_signout) {
-                    editor.clear();
-                    editor.apply();
-                    Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.menu_settings) {
-                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            });
-
-            popup.show(); // ⬅ Show menu sau khi cấu hình
-        });
-
-
-        // Spinner
         spinnerCategory = findViewById(R.id.spinnerCategory);
         spinnerSort = findViewById(R.id.spinnerSort);
-        setupSpinners();
-
-        // RecyclerView sản phẩm
         recyclerCake = findViewById(R.id.recyclerCake);
         recyclerCake.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new CakeAdapter(this, currentCakes);
         recyclerCake.setAdapter(adapter);
 
-        // Dữ liệu mẫu
-        allCakes.add(new Cake("Strawberry Cake", "Cake", 15.5, R.drawable.donut1));
-        allCakes.add(new Cake("Chocolate Cake", "Cake", 18.0, R.drawable.donut3));
-        allCakes.add(new Cake("Matcha Delight", "Cake", 16.2, R.drawable.donut1));
-        allCakes.add(new Cake("Vanilla Dream", "Cake", 12.0, R.drawable.donut2));
-        allCakes.add(new Cake("Lemon Light", "Cake", 14.3, R.drawable.donut1));
-        allCakes.add(new Cake("Berry Mix", "Cake", 19.0, R.drawable.donut2));
-        allCakes.add(new Cake("Caramel Crunch", "Cake", 17.7, R.drawable.donut1));
-        allCakes.add(new Cake("Red Velvet", "Cake", 20.0, R.drawable.donut2));
-        allCakes.add(new Cake("Coconut Cream", "Cake", 13.5, R.drawable.donut1));
-        allCakes.add(new Cake("Coffee Cake", "Cake", 15.9, R.drawable.donut2));
-        allCakes.add(new Cake("Pineapple Cake", "Cake", 14.2, R.drawable.donut3));
-
-        updateData();
+        setupSpinners();
+        loadData();
 
         // Phân trang
         findViewById(R.id.btnPage1).setOnClickListener(v -> {
@@ -140,7 +81,7 @@ public class ShopActivity extends AppCompatActivity {
             updateData();
         });
         findViewById(R.id.btnNext).setOnClickListener(v -> {
-            int maxPage = (int) Math.ceil(allCakes.size() / (double) itemsPerPage);
+            int maxPage = (int) Math.ceil(filteredCakes.size() / (double) itemsPerPage);
             if (currentPage < maxPage) {
                 currentPage++;
                 updateData();
@@ -153,131 +94,91 @@ public class ShopActivity extends AppCompatActivity {
         categories.add(new Category("Donuts", R.drawable.donut1));
         categories.add(new Category("Cakes", R.drawable.donut2));
         categories.add(new Category("Cupcakes", R.drawable.donut3));
-
         CategoryAdapter catAdapter = new CategoryAdapter(this, categories);
         recyclerCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerCategory.setAdapter(catAdapter);
 
         // Giỏ hàng
-        ImageView btnCart = findViewById(R.id.btnCart);
-        btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(ShopActivity.this, CartActivity.class);
-            startActivity(intent);
-        });
+        findViewById(R.id.btnCart).setOnClickListener(v ->
+                startActivity(new Intent(this, CartActivity.class)));
 
-        // Profile menu (avatar tròn)
-        ImageView btnAccount = findViewById(R.id.btnAccount);
-        btnProfile.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(ShopActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.drawe_menu, popup.getMenu());
+        // Menu account
 
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.menu_signin) {
-                    Intent intent = new Intent(ShopActivity.this, SiginActivity.class);
-                    startActivity(intent);
-                } else if (id == R.id.menu_signout) {
-                    Toast.makeText(this, "Sign Out clicked", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.menu_settings) {
-                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            });
 
-            popup.show();
-        });
-
-        // Nút tài khoản/avatar
-        ImageView btnMenu = findViewById(R.id.btnMenu);  // đúng id
-        btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(ShopActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.menu_drawer, popup.getMenu()); // đúng tên file
-
-            popup.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.menu_home) {
-                    startActivity(new Intent(this, HomeActivity.class));
-                } else if (id == R.id.menu_shop) {
-                    startActivity(new Intent(this, ShopActivity.class));
-                } else if (id == R.id.menu_about) {
-                    startActivity(new Intent(this, AboutActivity.class));
-                } else if (id == R.id.menu_contact) {
-                    startActivity(new Intent(this, ContactActivity.class));
-                }else if (id == R.id.menu_pages) {
-                    startActivity(new Intent(this, PageActivity.class));
-                }
-                return true;
-            });
-
-            popup.show();  // QUAN TRỌNG
-        });
+        // Avatar - tài khoản
     }
-    // Google Map hiển thị khi đã sẵn sàng
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//
-//        LatLng shopLocation = new LatLng(10.7769, 106.7009);
-//        mMap.addMarker(new MarkerOptions()
-//                .position(shopLocation)
-//                .title("Shop ABC - 123 Đường X, Quận 1"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(shopLocation, 16));
-//    }
 
     private void setupSpinners() {
         String[] categories = {"All", "Cake", "Donut", "Ice Cream", "Drink"};
         String[] sortOptions = {"Default", "Price Low to High", "Price High to Low"};
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(categoryAdapter);
+        ArrayAdapter<String> catAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(catAdapter);
 
         ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sortOptions);
         sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(sortAdapter);
 
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selected = categories[position];
-                Toast.makeText(ShopActivity.this, "Filter by: " + selected, Toast.LENGTH_SHORT).show();
-                updateData();
+            @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = categories[position];
+                currentPage = 1;
+                applyFilter();
             }
             @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = sortOptions[position];
-                Toast.makeText(ShopActivity.this, "Sort by: " + selected, Toast.LENGTH_SHORT).show();
                 if (selected.equals("Price Low to High")) {
                     Collections.sort(allCakes, Comparator.comparingDouble(Cake::getPrice));
                 } else if (selected.equals("Price High to Low")) {
                     Collections.sort(allCakes, (a, b) -> Double.compare(b.getPrice(), a.getPrice()));
                 }
-                updateData();
+                applyFilter();
             }
             @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
+    private void loadData() {
+        allCakes.add(new Cake("Strawberry Cake", "Dâu", "Cake", 15.5, R.drawable.donut1));
+        allCakes.add(new Cake("Choco Donut", "Chocolate", "Donut", 13.0, R.drawable.donut2));
+        allCakes.add(new Cake("Vanilla Muffin", "Vani", "Muffin", 12.5, R.drawable.donut3));
+        allCakes.add(new Cake("Lemon Tart", "Chanh", "Tart", 14.0, R.drawable.cake3));
+        allCakes.add(new Cake("Matcha Cake", "Matcha", "Cake", 18.0, R.drawable.donut1));
+        allCakes.add(new Cake("Blueberry Donut", "Việt quất", "Donut", 16.5, R.drawable.donut2));
+        allCakes.add(new Cake("Red Velvet", "Dâu đỏ", "Cake", 20.0, R.drawable.cake2));
+        allCakes.add(new Cake("Mango Tart", "Xoài", "Tart", 17.0, R.drawable.donut3));
+        allCakes.add(new Cake("Coconut Muffin", "Dừa", "Muffin", 11.5, R.drawable.cake1));
+        allCakes.add(new Cake("Caramel Donut", "Caramel", "Donut", 15.0, R.drawable.donut2));
+
+        applyFilter();
+    }
+
+    private void applyFilter() {
+        filteredCakes.clear();
+        for (Cake c : allCakes) {
+            if (selectedCategory.equals("All") || c.getCategory().equalsIgnoreCase(selectedCategory)) {
+                filteredCakes.add(c);
+            }
+        }
+        updateData();
+    }
+
     private void updateData() {
         int start = (currentPage - 1) * itemsPerPage;
-        int end = Math.min(start + itemsPerPage, allCakes.size());
+        int end = Math.min(start + itemsPerPage, filteredCakes.size());
 
         currentCakes.clear();
-        currentCakes.addAll(allCakes.subList(start, end));
+        if (start < filteredCakes.size()) {
+            currentCakes.addAll(filteredCakes.subList(start, end));
+        }
         adapter.notifyDataSetChanged();
 
         TextView tvResult = findViewById(R.id.tvResult);
-        tvResult.setText("Showing " + (start + 1) + " - " + end + " of " + allCakes.size() + " results");
-    }
-
-    private void setActive(TextView selectedBtn) {
-        for (TextView btn : menuButtons) {
-            btn.setTextAppearance(R.style.MenuItemStyle);
-        }
-        selectedBtn.setTextAppearance(R.style.MenuItemStyle_Active);
+        tvResult.setText("Hiển thị " + (start + 1) + " - " + end + " / " + filteredCakes.size() + " sản phẩm");
     }
 }

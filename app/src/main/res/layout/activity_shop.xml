@@ -1,23 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_spinner">
 
     <!-- Nội dung chính scroll được -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollContent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation"
+        android:padding="16dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <!-- 🧭 Top Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:background="#FF91C0">
+
+                <ImageView
+                    android:src="@drawable/ic_location"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+                <TextView
+                    android:layout_marginStart="8dp"
+                    android:text="New York, USA"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/btnCart"
+                    android:src="@drawable/gio_hang"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp" />
+
+                <ImageView
+                    android:src="@drawable/ic_belll"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+
+
             <!-- 🔍 Search bar -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,138 +87,156 @@
                     android:layout_height="24dp" />
             </LinearLayout>
 
+            <!-- Bộ lọc -->
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:weightSum="2">
-
-            <!-- Category -->
-            <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginEnd="12dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:weightSum="2">
 
-                <TextView
-                    android:text="Category"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
+                <!-- Category -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#333333"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="12dp">
 
-                <Spinner
-                    android:id="@+id/spinnerCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_spinner"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:spinnerMode="dropdown"
-                    android:dropDownVerticalOffset="10dp" />
+                    <TextView
+                        android:text="Category"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="4dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_spinner"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="10dp" />
+                </LinearLayout>
+
+                <!-- Sort -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="Sort"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="4dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerSort"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_spinner"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="10dp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Sort -->
-            <LinearLayout
-                android:layout_width="0dp"
+            <!-- Danh sách category -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCategory"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                tools:listitem="@layout/item_category"
+                android:orientation="horizontal"
+                android:overScrollMode="never" />
 
-                <TextView
-                    android:text="Sort"
-                    android:textStyle="bold"
+            <!-- Tiêu đề sản phẩm -->
+            <TextView
+                android:text="Product"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Danh sách sản phẩm -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_cake" />
+
+            <!-- Phân trang -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp">
+
+                <Button
+                    android:id="@+id/btnPage1"
+                    android:text="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#333333"
-                    android:layout_marginBottom="4dp" />
-
-                <Spinner
-                    android:id="@+id/spinnerSort"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_spinner"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:spinnerMode="dropdown"
-                    android:dropDownVerticalOffset="10dp" />
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnPage2"
+                    android:text="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnPage3"
+                    android:text="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnNext"
+                    android:text="›"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-        </LinearLayout>
-        <!-- Danh sách bánh -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_category"
-            android:orientation="horizontal"
-            android:overScrollMode="never" />
-        <!-- 🔶 Popular Items -->
-        <TextView
-            android:text="Product"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCake"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/item_cake" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp">
+            <!-- Kết quả -->
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Showing 1-9 of 30 results" />
 
-            <Button android:id="@+id/btnPage1"
-                android:text="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button android:id="@+id/btnPage2"
-                android:text="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button android:id="@+id/btnPage3"
-                android:text="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button android:id="@+id/btnNext"
-                android:text="›"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="Showing 1-9 of 30 results"/>
-        <include
-            layout="@layout/footer"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            <!-- Footer -->
+            <include
+                layout="@layout/footer"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <!-- 🔽 Bottom Menu -->
-    <include
-        layout="@layout/menu_bar"
+
+    <!-- Menu dưới cùng cố định -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector" />
+
+</RelativeLayout>

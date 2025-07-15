@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:background="#8B4C11">
+        android:background="#FF91C0">
 
         <ImageView
             android:src="@drawable/ic_location"
@@ -34,7 +34,7 @@
 
         <ImageView
             android:id="@+id/btnCart"
-            android:src="@drawable/ic_cart"
+            android:src="@drawable/gio_hang"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="16dp" />
@@ -61,6 +61,7 @@
             android:layout_height="24dp" />
 
         <EditText
+            android:id="@+id/edtSearch"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -97,12 +98,18 @@
 
             <!-- 🧁 Categories -->
             <TextView
+                android:id="@+id/txtCategories"
                 android:text="Categories"
                 android:textStyle="bold"
                 android:textSize="18sp"
+                android:textColor="#5D4037"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:shadowColor="#BDBDBD"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerCategory"

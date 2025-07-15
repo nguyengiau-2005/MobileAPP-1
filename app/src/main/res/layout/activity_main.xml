@@ -1,52 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="50dp"
-    android:gravity="center"
-    android:background="@drawable/gradient">
+    android:background="@drawable/bg_dessert">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="247dp"
-        android:layout_height="216dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:contentDescription="@string/logo"
-        android:src="@drawable/transparent" />
-
-    <EditText
-        android:id="@+id/txtUsername"
+    <!-- Nội dung chính -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="textName"
-        android:hint="@string/username"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/custom_edittext"
-        android:padding="14dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="textPassword"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:background="@drawable/custom_edittext"
-        android:padding="14dp"
-        android:layout_marginBottom="24dp"/>
+        <!-- Icon Menu 3 gạch -->
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_menu"
+            android:scaleType="centerInside"
+            android:contentDescription="Menu" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/custom_button"
-        android:padding="12dp"
-        android:text="@string/htn_login"
-        android:textColor="#FFFFFF" />
+        <!-- Tiêu đề -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Discover a new way..."
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:fontFamily="cursive"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to dessert"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:layout_below="@id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+
+        <!-- Hình ảnh bánh -->
+
+        <!-- Nút Start Shopping -->
+
+        <ImageView
+            android:id="@+id/imgCake"
+            android:layout_width="393dp"
+            android:layout_height="398dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="176dp"
+            android:contentDescription="Cake Image"
+            android:src="@drawable/cakes_to_main" />
+
+        <Button
+            android:id="@+id/btnStartShopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start shopping"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dp"
+            android:backgroundTint="#f26c93"
+            android:textColor="@android:color/white"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp" />
+    </RelativeLayout>
+
+    <!-- Menu Navigation -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu_drawer"
+        android:background="#FFF" />
+</androidx.drawerlayout.widget.DrawerLayout>

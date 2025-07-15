@@ -175,10 +175,5 @@
 </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <!-- 🔽 Bottom Menu -->
-    <include
-        layout="@layout/menu_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp" />
 </LinearLayout>
 

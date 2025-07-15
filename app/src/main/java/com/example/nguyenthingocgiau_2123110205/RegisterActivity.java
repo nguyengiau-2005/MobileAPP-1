@@ -2,8 +2,10 @@ package com.example.nguyenthingocgiau_2123110205;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -35,16 +37,22 @@ public class RegisterActivity extends AppCompatActivity {
         EditText txtPassword = findViewById(R.id.txtPassword);
         EditText txtConfirm = findViewById(R.id.txtConfirm);
         Button btnRegister = findViewById(R.id.btnRegister);
+        TextView txtBackToLogin = findViewById(R.id.txtBackToLogin);
 
         // Xử lý sự kiện khi nhấn nút Đăng ký
         btnRegister.setOnClickListener(v -> {
             String username = txtUsername.getText().toString().trim();
             String email = txtEmail.getText().toString().trim();
             String password = txtPassword.getText().toString();
-            String confirm = txtConfirm.getText().toString(); // dùng đúng biến đã ánh xạ
+            String confirm = txtConfirm.getText().toString();
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -54,10 +62,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-            // Chuyển về màn hình đăng nhập
-            Intent intent = new Intent(this, SiginActivity.class); // đảm bảo tên class đúng
-            startActivity(intent);
+            startActivity(new Intent(this, SiginActivity.class));
             finish();
+        });
+
+        txtBackToLogin.setOnClickListener(v -> {
+            startActivity(new Intent(RegisterActivity.this, SiginActivity.class));
         });
     }
 }
