@@ -1,179 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_spinner">
+    android:background="@drawable/bg_spinner"
+    tools:context=".ContactActivity">
 
-    <!-- Nội dung chính scroll được -->
+    <!-- Nội dung cuộn -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation"
         android:padding="16dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!-- 🔍 Search bar -->
+
+            <!-- 🔍 Thanh tìm kiếm -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="2dp"
                 android:gravity="center_vertical"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_spinner">
 
                 <ImageView
-                    android:src="@drawable/ic_search"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search" />
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="48dp"
-                    android:hint="Search.."
-                    android:background="@null"
-                    android:paddingStart="8dp" />
+                    android:hint="Tìm kiếm..."
+                    android:paddingStart="8dp"
+                    android:background="@null" />
 
                 <ImageView
-                    android:src="@drawable/ic_filter"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_filter" />
             </LinearLayout>
 
             <!-- Tiêu đề -->
-    <TextView
-        android:id="@+id/tvContactTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Liên hệ với chúng tôi"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp" />
-
-    <!-- Thông tin liên hệ -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:background="#F5F5F5"
-        android:elevation="2dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="8dp"
-        android:clipToPadding="false">
-
-        <!-- Email -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_sent" />
-
             <TextView
+                android:id="@+id/tvContactTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" contact@example.com"
-                android:textSize="16sp"
-                android:textColor="#000000" />
-        </LinearLayout>
+                android:text="Liên hệ với chúng tôi"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp" />
 
-        <!-- SĐT -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/bg_phone" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Thông tin liên hệ -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" 0123 456 789"
-                android:textSize="16sp"
-                android:textColor="#000000" />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="#F5F5F5"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="8dp"
+                android:elevation="2dp">
 
-        <!-- Địa chỉ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
+                <!-- Email -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/bg_localtion" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_sent" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" contact@example.com"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <!-- SĐT -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/bg_phone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 0123 456 789"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <!-- Địa chỉ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/bg_localtion" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 123 đường ABC, Quận 1, TP.HCM"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Form nhập -->
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" 123 đường ABC, Quận 1, TP.HCM"
-                android:textSize="16sp"
-                android:textColor="#000000" />
+                android:hint="Họ và tên"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_input" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_input" />
+
+            <EditText
+                android:id="@+id/edtMessage"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Nội dung liên hệ"
+                android:gravity="top"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_input" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gửi liên hệ"
+                android:textAllCaps="false"
+                android:backgroundTint="#FF4081"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
         </LinearLayout>
-    </LinearLayout>
-
-    <!-- Form nhập -->
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Họ và tên"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/bg_input" />
-
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:padding="12dp"
-        android:inputType="textEmailAddress"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/bg_input" />
-
-    <EditText
-        android:id="@+id/edtMessage"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:hint="Nội dung liên hệ"
-        android:padding="12dp"
-        android:gravity="top"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_input" />
-
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gửi liên hệ"
-        android:textAllCaps="false"
-        android:backgroundTint="#FF4081"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"/>
-</LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <!-- 🔽 Bottom Menu -->
-</LinearLayout>
 
+    <!-- Thanh điều hướng dưới -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#bdedfe"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector" />
+</RelativeLayout>

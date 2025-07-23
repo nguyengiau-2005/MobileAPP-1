@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_spinner">
 
-    <!-- Nội dung chính scroll được -->
+    <!-- Nội dung scroll được -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
@@ -20,223 +20,177 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <!-- 🧭 Top Bar -->
             <LinearLayout
+                android:id="@+id/topBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:padding="16dp"
-                android:background="#FF91C0">
+                android:background="#FFFFFF">
 
                 <ImageView
-                    android:src="@drawable/ic_location"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-
-                <TextView
-                    android:layout_marginStart="8dp"
-                    android:text="New York, USA"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:id="@+id/btnCart"
-                    android:src="@drawable/gio_hang"
+                    android:id="@+id/btnMenu"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="16dp" />
+                    android:src="@drawable/ic_menu"
+                    android:contentDescription="Menu" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
                 <ImageView
-                    android:src="@drawable/ic_belll"
+                    android:id="@+id/btnSearch"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
-            </LinearLayout>
-
-
-            <!-- 🔍 Search bar -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/bg_spinner">
-
-                <ImageView
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
                     android:src="@drawable/ic_search"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:contentDescription="Tìm kiếm" />
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="48dp"
-                    android:hint="Search.."
-                    android:background="@null"
-                    android:paddingStart="8dp" />
-
-                <ImageView
-                    android:src="@drawable/ic_filter"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-            </LinearLayout>
-
-            <!-- Bộ lọc -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="8dp"
-                android:weightSum="2">
-
-                <!-- Category -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <FrameLayout
+                    android:id="@+id/frameCart"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="12dp">
+                    android:layout_marginEnd="16dp"
+                    android:layout_gravity="end">
+
+                    <ImageView
+                        android:id="@+id/btnCart"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/gio_hang"
+                        android:contentDescription="Giỏ hàng" />
 
                     <TextView
-                        android:text="Category"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#333333"
-                        android:layout_marginBottom="4dp" />
-
-                    <Spinner
-                        android:id="@+id/spinnerCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_spinner"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:spinnerMode="dropdown"
-                        android:dropDownVerticalOffset="10dp" />
-                </LinearLayout>
-
-                <!-- Sort -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:text="Sort"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#333333"
-                        android:layout_marginBottom="4dp" />
-
-                    <Spinner
-                        android:id="@+id/spinnerSort"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_spinner"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:spinnerMode="dropdown"
-                        android:dropDownVerticalOffset="10dp" />
-                </LinearLayout>
+                        android:id="@+id/cartBadge"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="end|top"
+                        android:background="@drawable/badge_red"
+                        android:text="0"
+                        android:textSize="10sp"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+                </FrameLayout>
             </LinearLayout>
 
-            <!-- Danh sách category -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerCategory"
+            <!-- 🔍 EditText Tìm kiếm -->
+            <EditText
+                android:id="@+id/edtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                tools:listitem="@layout/item_category"
-                android:orientation="horizontal"
-                android:overScrollMode="never" />
-
-            <!-- Tiêu đề sản phẩm -->
-            <TextView
-                android:text="Product"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:hint="Tìm bánh theo tên..."
+                android:padding="12dp"
+                android:background="@drawable/bg_edittext"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="8dp"
+                android:inputType="text" />
 
-            <!-- Danh sách sản phẩm -->
+            <!-- 📢 TextView kết quả tìm kiếm -->
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hiển thị 1-6 / 10 sản phẩm"
+                android:textColor="#666"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- 🧁 Sản phẩm theo trang -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerCake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_cake" />
+                tools:listitem="@layout/item_cake"
+                android:overScrollMode="never" />
 
-            <!-- Phân trang -->
+            <!-- 📢 Tiêu đề nổi bật -->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Fresh From The Oven"
+                    android:fontFamily="@font/lobster_regular"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#333" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:textColor="#F06292"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerFeaturedCakes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_cake" />
+            <!-- 🔢 Phân trang -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:weightSum="4">
 
                 <Button
                     android:id="@+id/btnPage1"
-                    android:text="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="1" />
                 <Button
                     android:id="@+id/btnPage2"
-                    android:text="2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="2" />
                 <Button
                     android:id="@+id/btnPage3"
-                    android:text="3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="3" />
                 <Button
                     android:id="@+id/btnNext"
-                    android:text="›"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=">" />
             </LinearLayout>
-
-            <!-- Kết quả -->
-            <TextView
-                android:id="@+id/tvResult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="Showing 1-9 of 30 results" />
-
-            <!-- Footer -->
-            <include
-                layout="@layout/footer"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Menu dưới cùng cố định -->
+    <!-- 🔻 Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
+        android:background="#bdedfe"
         app:menu="@menu/menu_bottom_nav"
         app:itemIconTint="@color/nav_selector"
         app:itemTextColor="@color/nav_selector" />
-
 </RelativeLayout>

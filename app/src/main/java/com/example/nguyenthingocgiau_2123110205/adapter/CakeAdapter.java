@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguyenthingocgiau_2123110205.CartItem;
+import com.example.nguyenthingocgiau_2123110205.CartManager;
 import com.example.nguyenthingocgiau_2123110205.ProductDetailActivity;
 import com.example.nguyenthingocgiau_2123110205.R;
 import com.example.nguyenthingocgiau_2123110205.model.Cake;
@@ -36,15 +38,14 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgCake;
         TextView txtName, txtFlavor, txtPrice;
-        Button btnAddToCart;
-
+        ImageView btnAddToCart;
         public ViewHolder(View itemView) {
             super(itemView);
             imgCake = itemView.findViewById(R.id.imgCake);
             txtName = itemView.findViewById(R.id.txtName);
             txtFlavor = itemView.findViewById(R.id.txtFlavor);
             txtPrice = itemView.findViewById(R.id.txtPrice);
-            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart); // không cần đổi dòng này nếu đã sửa kiểu
         }
     }
 
@@ -73,24 +74,29 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.ViewHolder> {
             intent.putExtra("category", cake.getFlavor());
             intent.putExtra("price", cake.getPrice());
             intent.putExtra("image", cake.getImageResId());
-            intent.putExtra("description", "Mô tả chi tiết của " + cake.getName());
+            intent.putExtra("description", "Mô tả chi tiết: " + cake.getDescription());
             context.startActivity(intent);
         });
 
         // Nút thêm vào giỏ hàng (nếu cần)
         holder.btnAddToCart.setOnClickListener(v -> {
-            Toast.makeText(context, "Đã thêm vào giỏ: " + cake.getName(), Toast.LENGTH_SHORT).show();
-            // Có thể gọi callback hoặc update giỏ hàng tại đây nếu bạn có logic sẵn
+            CartManager.addToCart(new CartItem(
+                    cake.getName(),
+                    cake.getPrice(),
+                    1,
+                    cake.getImageResId()
+            ));
+            Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         });
+
     }
 
     @Override
     public int getItemCount() {
         return cakeList.size();
     }
-    public void updateData(List<Cake> newList) {
-        this.cakeList = new ArrayList<>(newList);
+    public void updateData(List<Cake> newCakes) {
+        this.cakeList = newCakes;
         notifyDataSetChanged();
     }
-
 }

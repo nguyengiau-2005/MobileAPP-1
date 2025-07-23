@@ -3,22 +3,21 @@ package com.example.nguyenthingocgiau_2123110205;
 public class CartItem {
     private String name;
     private double price;
-    private int imageResId;
     private int quantity;
-    private boolean selected;
+    private int imageResId;
+    private boolean selected = true;
 
-    public CartItem(String name, double price, int imageResId, int quantity) {
+    public CartItem(String name, double price, int quantity, int imageResId) {
         this.name = name;
         this.price = price;
-        this.imageResId = imageResId;
         this.quantity = quantity;
-        this.selected = true;
+        this.imageResId = imageResId;
     }
 
     public String getName() { return name; }
     public double getPrice() { return price; }
-    public int getImageResId() { return imageResId; }
     public int getQuantity() { return quantity; }
+    public int getImageResId() { return imageResId; }
     public boolean isSelected() { return selected; }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }

@@ -70,7 +70,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         if (name != null) txtName.setText(name);
         if (category != null) txtCategory.setText(category);
-        txtPrice.setText(String.format("₫%.0f", price));
+        txtPrice.setText(String.format("₫%.000f", price));
         imgProduct.setImageResource(imageRes);
 
         if (description != null && !description.isEmpty()) {
@@ -78,6 +78,22 @@ public class ProductDetailActivity extends AppCompatActivity {
         } else {
             txtDescription.setText("Đây là mô tả chi tiết của sản phẩm " + (name != null ? name : ""));
         }
+        TextView btnToggle = findViewById(R.id.btnToggleDescription);
+        final boolean[] isExpanded = {false};
+
+        btnToggle.setOnClickListener(v -> {
+            if (isExpanded[0]) {
+                // Thu gọn
+                txtDescription.setMaxLines(4);
+                btnToggle.setText("Xem thêm");
+            } else {
+                // Mở rộng
+                txtDescription.setMaxLines(Integer.MAX_VALUE);
+                btnToggle.setText("Thu gọn");
+            }
+            isExpanded[0] = !isExpanded[0];
+        });
+
 
         /* ───────────── Sự kiện nút ───────────── */
         btnBuyNow.setOnClickListener(v ->
@@ -93,9 +109,55 @@ public class ProductDetailActivity extends AppCompatActivity {
         relatedRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         List<Cake> relatedCakes = new ArrayList<>();
-        relatedCakes.add(new Cake("Strawberry Cake", "Dâu", "Donuts", 29000, R.drawable.cake3));
-        relatedCakes.add(new Cake("Vanilla Muffin", "Vani", "Donuts", 25000, R.drawable.donut3));
-        relatedCakes.add(new Cake("Lemon Tart", "Chanh", "Donuts", 35000, R.drawable.donut1));
+        relatedCakes.add(new Cake(
+                "Strawberry Cake", "Dâu", "Donuts", 29000, R.drawable.product1,
+                "Bánh dâu tây ngọt dịu, được phủ lớp kem mềm mịn và trang trí dâu tươi mọng nước."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Vanilla Muffin", "Vani", "Donuts", 25000, R.drawable.product2,
+                "Muffin vani thơm lừng, mềm xốp, là lựa chọn tuyệt vời cho bữa sáng hoặc bữa xế."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Lemon Tart", "Chanh", "Donuts", 35000, R.drawable.product3,
+                "Tart chanh với lớp vỏ giòn rụm và nhân chanh chua ngọt, kích thích vị giác."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Chocolate Lava", "Socola", "Donuts", 39000, R.drawable.product4,
+                "Bánh socola tan chảy với lớp nhân đậm vị cacao, hấp dẫn ngay từ lần cắn đầu tiên."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Matcha Cream Cake", "Trà xanh", "Muffin", 31000, R.drawable.product5,
+                "Bánh trà xanh kết hợp kem béo nhẹ, thơm dịu vị matcha nguyên chất từ Nhật Bản."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Blueberry Cupcake", "Việt quất", "Cupcake", 28000, R.drawable.product6,
+                "Cupcake việt quất ngọt thanh, xen lẫn hương vị trái cây tự nhiên và lớp kem mịn màng."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Cheesecake Slice", "Phô mai", "Slice", 36000, R.drawable.product7,
+                "Miếng bánh cheesecake mềm mịn, béo thơm, thích hợp dùng lạnh cùng một tách trà."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Orange Tart", "Cam", "Tart", 34000, R.drawable.product8,
+                "Tart cam chua ngọt nhẹ, giàu vitamin C với lớp vỏ vàng giòn và nhân trái cây tươi."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Pistachio Donut", "Hạt dẻ", "Donuts", 33000, R.drawable.product9,
+                "Donut hạt dẻ thơm bùi, phủ lớp kem socola trắng cùng topping hạt dẻ giòn tan."
+        ));
+
+        relatedCakes.add(new Cake(
+                "Coconut Cupcake", "Dừa", "Cupcake", 27000, R.drawable.product10,
+                "Cupcake dừa ngọt ngào, được làm từ cơm dừa tươi và phủ kem dừa béo ngậy."
+        ));
 
         CakeAdapter adapter = new CakeAdapter(this, relatedCakes);
         relatedRecyclerView.setAdapter(adapter);

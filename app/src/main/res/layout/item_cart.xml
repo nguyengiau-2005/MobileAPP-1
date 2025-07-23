@@ -1,89 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:background="@drawable/bg_cart_item"
     android:padding="8dp"
+    android:layout_marginVertical="6dp"
     android:gravity="center_vertical">
 
-<!-- Hình ảnh sản phẩm -->
-<ImageView
-    android:id="@+id/imgProduct"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:scaleType="centerCrop"
-    android:layout_marginStart="8dp"
-    app:layout_constraintStart_toEndOf="@id/checkboxItem"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent" />
+    <!-- Hình ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="8dp" />
 
-<!-- Phần thông tin và nút điều khiển -->
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:orientation="vertical"
-    android:paddingStart="8dp">
-
-    <!-- Tên sản phẩm -->
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tên sản phẩm"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <!-- Giá sản phẩm -->
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100.000đ"
-        android:textColor="#FF5722"
-        android:layout_marginTop="2dp" />
-
-    <!-- Số lượng -->
+    <!-- Phần thông tin và số lượng -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="4dp">
-
-        <ImageView
-            android:id="@+id/btnMinus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_minus" />
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtQuantity"
+            android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:text="1"
+            android:text="Tên bánh"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/btnPlus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_plus" />
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25.000đ"
+            android:textColor="#FF4081"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/btnMinus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_minus"
+                android:contentDescription="Trừ" />
+
+            <TextView
+                android:id="@+id/txtQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="8dp" />
+
+            <ImageView
+                android:id="@+id/btnPlus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_plus"
+                android:contentDescription="Cộng" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
-<!-- CheckBox chọn -->
-<CheckBox
-    android:id="@+id/checkboxItem"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp" />
+    <!-- CheckBox chọn -->
+    <CheckBox
+        android:id="@+id/checkboxItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="6dp" />
 
-<!-- ✅ Nút xoá -->
-<ImageView
-    android:id="@+id/btnDelete"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:src="@drawable/ic_trash"
-    android:contentDescription="Xoá sản phẩm" />
+    <!-- Nút xoá -->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_trash"
+        android:contentDescription="Xoá" />
 </LinearLayout>

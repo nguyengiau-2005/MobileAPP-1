@@ -148,7 +148,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cake2"
+                    android:src="@drawable/product2"
                     android:layout_gravity="center" />
 
                 <TextView
@@ -172,7 +172,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/cake3"
+                    android:src="@drawable/product3"
                     android:layout_gravity="center" />
 
                 <TextView
@@ -287,7 +287,7 @@
                     android:layout_marginBottom="8dp">
 
                     <ImageView
-                        android:src="@drawable/cake2"
+                        android:src="@drawable/product4"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="8dp" />
@@ -308,7 +308,7 @@
                     android:layout_marginBottom="8dp">
 
                     <ImageView
-                        android:src="@drawable/cake3"
+                        android:src="@drawable/product6"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="8dp" />
@@ -348,7 +348,7 @@
                 android:layout_height="200dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@drawable/cake4" />
+                android:src="@drawable/product5" />
         </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

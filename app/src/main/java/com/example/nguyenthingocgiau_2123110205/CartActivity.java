@@ -52,12 +52,12 @@ public class CartActivity extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
     }
 
-    private ArrayList<CartItem> getCartItems() {
-        ArrayList<CartItem> list = new ArrayList<>();
-        list.add(new CartItem("Bàn trang điểm", 159000, R.drawable.product1, 1));
-        list.add(new CartItem("Kệ máy tính", 49000, R.drawable.product2, 1));
-        list.add(new CartItem("Bèo tổ ong", 13260, R.drawable.product3, 1));
-        return list;
-
-    }
+//    private ArrayList<CartItem> getCartItems() {
+//        ArrayList<CartItem> list = new ArrayList<>();
+//        list.add(new CartItem("Bàn trang điểm", 159000, R.drawable.product1, 1));
+//        list.add(new CartItem("Kệ máy tính", 49000, R.drawable.product2, 1));
+//        list.add(new CartItem("Bèo tổ ong", 13260, R.drawable.product3, 1));
+//        return list;
+//
+//    }
 }

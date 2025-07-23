@@ -20,24 +20,15 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="center" />
 
-        <!-- Tên ứng dụng -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lovina"
-            android:textSize="24sp"
-            android:textColor="#FF4081"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
-
         <!-- Sign In -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign In"
+            android:fontFamily="@font/lobster_regular"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#000"
+            android:textColor="#FF4081"
             android:layout_marginTop="30dp" />
 
         <!-- Username -->
@@ -46,9 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Username"
+            android:fontFamily="@font/lobster_regular"
             android:drawableStart="@drawable/ic_user"
             android:background="@drawable/edittext_background"
             android:paddingStart="12dp"
+            android:textColor="#9e182b"
             android:layout_marginTop="20dp" />
 
         <!-- Password -->
@@ -57,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Password"
+            android:fontFamily="@font/lobster_regular"
             android:drawableStart="@drawable/ic_lock"
             android:inputType="textPassword"
             android:background="@drawable/edittext_background"

@@ -6,7 +6,9 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -27,6 +29,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.nguyenthingocgiau_2123110205.adapter.BannerAdapter;
 import com.example.nguyenthingocgiau_2123110205.adapter.CakeAdapter;
 import com.example.nguyenthingocgiau_2123110205.adapter.CategoryAdapter;
+import com.example.nguyenthingocgiau_2123110205.adapter.TopBakeAdapter;
+import com.example.nguyenthingocgiau_2123110205.model.Bake;
 import com.example.nguyenthingocgiau_2123110205.model.Banner;
 import com.example.nguyenthingocgiau_2123110205.model.Cake;
 import com.example.nguyenthingocgiau_2123110205.model.Category;
@@ -82,10 +86,12 @@ public class HomeActivity extends AppCompatActivity {
         recyclerCake = findViewById(R.id.recyclerCake);
 
         List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("Donuts", R.drawable.cake1));
-        categoryList.add(new Category("Cupcakes", R.drawable.cake2));
-        categoryList.add(new Category("Cheesecakes", R.drawable.cake3));
-        categoryList.add(new Category("Pancakes", R.drawable.cake4));
+        categoryList.add(new Category("Donuts", R.drawable.cate1));
+        categoryList.add(new Category("Cupcakes", R.drawable.cate2));
+        categoryList.add(new Category("Cheesecakes", R.drawable.cate3));
+        categoryList.add(new Category("Pancakes", R.drawable.cate4));
+        categoryList.add(new Category("Muffins", R.drawable.cate5));
+        categoryList.add(new Category("Tarts", R.drawable.cate6));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerCategory.setLayoutManager(layoutManager);
@@ -110,22 +116,76 @@ public class HomeActivity extends AppCompatActivity {
 
         // === SẢN PHẨM ===
         List<Cake> cakes = new ArrayList<>();
-        cakes.add(new Cake("Choco Cupcakes", "Chocolate", "Cupcakes", 13.5, R.drawable.cake3));
-        cakes.add(new Cake("Strawberry Donut", "Strawberry", "Donuts", 14.0, R.drawable.cake2));
-        cakes.add(new Cake("Vanilla Cheesecake", "Vanilla", "Cheesecakes", 18.0, R.drawable.cake4));
-        cakes.add(new Cake("Matcha Pancake", "Matcha", "Pancakes", 16.5, R.drawable.cake1));
-        cakes.add(new Cake("Blueberry Donut", "Blueberry", "Donuts", 15.5, R.drawable.donut1));
-        cakes.add(new Cake("Red Velvet Cupcake", "Red Velvet", "Cupcakes", 17.0, R.drawable.cake3));
-        cakes.add(new Cake("Mango Cheesecake", "Mango", "Cheesecakes", 19.5, R.drawable.cake2));
-        cakes.add(new Cake("Caramel Pancake", "Caramel", "Pancakes", 14.5, R.drawable.cake4));
-        cakes.add(new Cake("Lemon Donut", "Lemon", "Donuts", 13.0, R.drawable.cake1));
-        cakes.add(new Cake("Chocolate Lava Cupcake", "Chocolate", "Cupcakes", 20.0, R.drawable.cake3));
+        cakes.add(new Cake("Choco Cupcakes", "Chocolate", "Cupcakes", 13500, R.drawable.product1,
+                "Bánh cupcake socola mềm mịn, phủ lớp kem tươi ngọt ngào, thích hợp cho buổi trà chiều."));
+        cakes.add(new Cake("Strawberry Donut", "Strawberry", "Donuts", 14000, R.drawable.product2,
+                "Donut dâu tây thơm ngon, phủ lớp kem dâu tươi, vị ngọt dịu."));
+        cakes.add(new Cake("Vanilla Cheesecake", "Vanilla", "Cheesecakes", 18000, R.drawable.product3,
+                "Cheesecake vani mịn mượt, hòa quyện giữa vị béo và ngọt thanh."));
+        cakes.add(new Cake("Matcha Pancake", "Matcha", "Pancakes", 16500, R.drawable.product4,
+                "Bánh pancake trà xanh đậm vị, kèm lớp syrup ngọt nhẹ cho buổi sáng năng lượng."));
+        cakes.add(new Cake("Blueberry Donut", "Blueberry", "Donuts", 15500, R.drawable.product5,
+                "Donut vị việt quất, giòn bên ngoài – mềm bên trong, thơm hương trái cây."));
+        cakes.add(new Cake("Red Velvet Cupcake", "Red Velvet", "Cupcakes", 17000, R.drawable.product6,
+                "Bánh Red Velvet sang trọng, phủ kem phô mai, phù hợp tiệc sinh nhật."));
+        cakes.add(new Cake("Mango Cheesecake", "Mango", "Cheesecakes", 19500, R.drawable.product7,
+                "Cheesecake xoài mát lạnh, lớp xoài tươi phía trên tạo hương vị nhiệt đới."));
+        cakes.add(new Cake("Caramel Pancake", "Caramel", "Pancakes", 14500, R.drawable.product8,
+                "Pancake caramel mềm, phủ sốt caramel ngọt ngào, đậm đà."));
+        cakes.add(new Cake("Lemon Donut", "Lemon", "Donuts", 13000, R.drawable.product9,
+                "Donut chanh thanh mát, lớp vỏ giòn, vị chua nhẹ cân bằng."));
+        cakes.add(new Cake("Chocolate Lava Cupcake", "Chocolate", "Cupcakes", 20000, R.drawable.product10,
+                "Cupcake lava với nhân socola nóng chảy bên trong, cực kỳ hấp dẫn."));
+        cakes.add(new Cake("Blueberry Cheesecake", "Blueberry", "Cheesecakes", 18500, R.drawable.product11,
+                "Cheesecake việt quất chua ngọt, lớp kem phô mai tan chảy."));
+        cakes.add(new Cake("Oreo Cupcake", "Oreo", "Cupcakes", 17500, R.drawable.product13,
+                "Cupcake Oreo thơm lừng, topping bánh quy Oreo giòn tan."));
 
         cakeList = new ArrayList<>(cakes);
         adapter = new CakeAdapter(this, cakeList);
         recyclerCake.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerCake.setNestedScrollingEnabled(false);
         recyclerCake.setAdapter(adapter);
+// === TOP BÁNH ===
+        RecyclerView recyclerTopBake = findViewById(R.id.recyclerTopBake);
+        List<Bake> bakes = new ArrayList<>();
+        bakes.add(new Bake(
+                R.drawable.bunny_twist,
+                "Bunny Twist Rolls",
+                "Những cuộn bánh hình chú thỏ đáng yêu, làm từ bột quế thơm lừng và phủ nhẹ đường bột. Phù hợp cho trẻ nhỏ và tiệc trà."
+        ));
+
+        bakes.add(new Bake(
+                R.drawable.donut_choco,
+                "Choco Donut",
+                "Bánh donut mềm mịn phủ lớp socola đắng ngọt, tan ngay trong miệng. Món ăn vặt yêu thích mọi thời đại."
+        ));
+
+        bakes.add(new Bake(
+                R.drawable.strawberry_pie,
+                "Strawberry Pie",
+                "Bánh pie dâu tây tươi ngon, lớp vỏ giòn rụm kết hợp cùng nhân dâu ngọt dịu và chút hương vani tự nhiên."
+        ));        // thêm nếu cần
+
+        TopBakeAdapter topBakeAdapter = new TopBakeAdapter(bakes);
+        recyclerTopBake.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerTopBake.setAdapter(topBakeAdapter);
+        Handler bakeHandler = new Handler();
+        Runnable bakeRunnable = new Runnable() {
+            int position = 0;
+
+            @Override
+            public void run() {
+                if (position >= bakes.size()) {
+                    position = 0;
+                }
+                recyclerTopBake.smoothScrollToPosition(position++);
+                bakeHandler.postDelayed(this, 3000); // 3 giây cuộn 1 lần
+            }
+        };
+        bakeHandler.postDelayed(bakeRunnable, 3000);
+
+
 
         // === TÌM KIẾM ===
         EditText edtSearch = findViewById(R.id.edtSearch);
@@ -144,9 +204,9 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // === BOTTOM NAVIGATION ===
+        // Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
-        bottomNav.setOnNavigationItemSelectedListener(item -> {
+        bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
                 startActivity(new Intent(this, HomeActivity.class));
@@ -154,22 +214,33 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.nav_shop) {
                 startActivity(new Intent(this, ShopActivity.class));
                 return true;
+            } else if (id == R.id.nav_chat) {
+                startActivity(new Intent(this, ContactActivity.class));
+                return true;
             } else if (id == R.id.nav_account) {
-                PopupMenu popupMenu = new PopupMenu(this, bottomNav);
+                View accountItemView = bottomNav.findViewById(R.id.nav_account);
+                PopupMenu popupMenu = new PopupMenu(this, accountItemView);
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    popupMenu.setGravity(Gravity.END);
+                }
+
                 popupMenu.getMenu().add(Menu.NONE, 1, 0, "Đăng nhập");
                 popupMenu.getMenu().add(Menu.NONE, 2, 1, "Đăng ký");
                 popupMenu.getMenu().add(Menu.NONE, 3, 2, "Đăng xuất");
+
                 popupMenu.setOnMenuItemClickListener(menuItem -> {
                     int itemId = menuItem.getItemId();
                     if (itemId == 1) {
-                        startActivity(new Intent(HomeActivity.this, SiginActivity.class));
+                        startActivity(new Intent(this, SiginActivity.class));
                     } else if (itemId == 2) {
-                        startActivity(new Intent(HomeActivity.this, RegisterActivity.class));
+                        startActivity(new Intent(this, RegisterActivity.class));
                     } else if (itemId == 3) {
                         Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 });
+
                 popupMenu.show();
                 return true;
             }

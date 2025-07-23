@@ -6,13 +6,15 @@ public class Cake {
     private String category;
     private double price;
     private int imageResId;
+    private String description; // 🔸 Thêm thuộc tính này
 
-    public Cake(String name, String flavor, String category, double price, int imageResId) {
+    public Cake(String name, String flavor, String category, double price, int imageResId, String description) {
         this.name = name;
         this.flavor = flavor;
         this.category = category;
         this.price = price;
         this.imageResId = imageResId;
+        this.description = description;
     }
 
     public String getName() {
@@ -33,5 +35,9 @@ public class Cake {
 
     public int getImageResId() {
         return imageResId;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
