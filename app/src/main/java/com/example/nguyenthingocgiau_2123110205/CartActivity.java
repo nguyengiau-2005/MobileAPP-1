@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nguyenthingocgiau_2123110205.adapter.CartAdapter;
+import com.example.nguyenthingocgiau_2123110205.model.CartItem;
 
 import java.util.ArrayList;
 
@@ -48,16 +52,35 @@ public class CartActivity extends AppCompatActivity {
             adapter.updateTotal();
         });
 
+        // Nút mua hàng
+        btnCheckout.setOnClickListener(v -> {
+            boolean hasItemSelected = false;
+
+            for (CartItem item : cartItems) {
+                if (item.isSelected()) {
+                    hasItemSelected = true;
+                    break;
+                }
+            }
+
+            if (hasItemSelected) {
+                // Xoá mục đã chọn
+                for (int i = cartItems.size() - 1; i >= 0; i--) {
+                    if (cartItems.get(i).isSelected()) {
+                        cartItems.remove(i);
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+                adapter.updateTotal();
+
+                Toast.makeText(CartActivity.this, "🎉 Mua hàng thành công!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(CartActivity.this, "Vui lòng chọn ít nhất một sản phẩm để mua!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Nút quay lại
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
     }
-
-//    private ArrayList<CartItem> getCartItems() {
-//        ArrayList<CartItem> list = new ArrayList<>();
-//        list.add(new CartItem("Bàn trang điểm", 159000, R.drawable.product1, 1));
-//        list.add(new CartItem("Kệ máy tính", 49000, R.drawable.product2, 1));
-//        list.add(new CartItem("Bèo tổ ong", 13260, R.drawable.product3, 1));
-//        return list;
-//
-//    }
 }

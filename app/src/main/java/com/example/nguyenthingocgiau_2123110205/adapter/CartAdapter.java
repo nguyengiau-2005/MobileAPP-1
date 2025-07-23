@@ -1,9 +1,10 @@
-package com.example.nguyenthingocgiau_2123110205;
+package com.example.nguyenthingocgiau_2123110205.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,16 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nguyenthingocgiau_2123110205.R;
+import com.example.nguyenthingocgiau_2123110205.model.CartItem;
+
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     Context context;
     List<CartItem> cartItems;
     TextView txtTotal;
-    View btnCheckout;
+    Button btnCheckout; // ✅ sửa lại kiểu
 
-    public CartAdapter(Context context, List<CartItem> cartItems, TextView txtTotal, View btnCheckout) {
+    public CartAdapter(Context context, List<CartItem> cartItems, TextView txtTotal, Button btnCheckout) {
         this.context = context;
         this.cartItems = cartItems;
         this.txtTotal = txtTotal;
@@ -77,13 +83,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public void updateTotal() {
         double total = 0;
+        int selectedCount = 0;
+
         for (CartItem item : cartItems) {
             if (item.isSelected()) {
                 total += item.getPrice() * item.getQuantity();
+                selectedCount++;
             }
         }
-        txtTotal.setText("Tổng cộng: " + total + "đ");
-        btnCheckout.setEnabled(total > 0);
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        txtTotal.setText("Tổng cộng: " + format.format(total));
+        btnCheckout.setText("Mua hàng (" + selectedCount + ")");
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnPlus = itemView.findViewById(R.id.btnPlus);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             checkboxItem = itemView.findViewById(R.id.checkboxItem);
-            btnDelete = itemView.findViewById(R.id.btnDelete); // thêm dòng này
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

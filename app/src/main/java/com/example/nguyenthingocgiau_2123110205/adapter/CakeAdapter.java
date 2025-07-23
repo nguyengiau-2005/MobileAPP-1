@@ -5,20 +5,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nguyenthingocgiau_2123110205.CartItem;
 import com.example.nguyenthingocgiau_2123110205.CartManager;
+import com.example.nguyenthingocgiau_2123110205.model.CartItem;
 import com.example.nguyenthingocgiau_2123110205.ProductDetailActivity;
 import com.example.nguyenthingocgiau_2123110205.R;
 import com.example.nguyenthingocgiau_2123110205.model.Cake;
 
-
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,13 +36,14 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.ViewHolder> {
         ImageView imgCake;
         TextView txtName, txtFlavor, txtPrice;
         ImageView btnAddToCart;
+
         public ViewHolder(View itemView) {
             super(itemView);
             imgCake = itemView.findViewById(R.id.imgCake);
             txtName = itemView.findViewById(R.id.txtName);
             txtFlavor = itemView.findViewById(R.id.txtFlavor);
             txtPrice = itemView.findViewById(R.id.txtPrice);
-            btnAddToCart = itemView.findViewById(R.id.btnAddToCart); // không cần đổi dòng này nếu đã sửa kiểu
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
         }
     }
 
@@ -67,34 +65,35 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.ViewHolder> {
 
         holder.txtFlavor.setText("Vị: " + cake.getFlavor());
 
-        // Sự kiện click item để xem chi tiết sản phẩm
+        // Sự kiện click để mở chi tiết sản phẩm
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
             intent.putExtra("name", cake.getName());
             intent.putExtra("category", cake.getFlavor());
             intent.putExtra("price", cake.getPrice());
             intent.putExtra("image", cake.getImageResId());
-            intent.putExtra("description", "Mô tả chi tiết: " + cake.getDescription());
+            intent.putExtra("description", cake.getDescription());
             context.startActivity(intent);
         });
 
-        // Nút thêm vào giỏ hàng (nếu cần)
+        // Thêm vào giỏ hàng
         holder.btnAddToCart.setOnClickListener(v -> {
-            CartManager.addToCart(new CartItem(
+            CartItem item = new CartItem(
                     cake.getName(),
                     cake.getPrice(),
                     1,
                     cake.getImageResId()
-            ));
+            );
+            CartManager.addToCart(item);
             Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         });
-
     }
 
     @Override
     public int getItemCount() {
         return cakeList.size();
     }
+
     public void updateData(List<Cake> newCakes) {
         this.cakeList = newCakes;
         notifyDataSetChanged();
